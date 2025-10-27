@@ -55,3 +55,34 @@ class Solution:
             stack.append(curr_elem)
 
         return [nge[num] for num in nums1]
+
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        stack = []
+        res = [-1]*len(nums)
+
+        for i in range(2*len(nums)-1,-1,-1):
+            current = nums[i%len(nums)]
+            while stack and stack[-1]<=current:
+                stack.pop()
+            if i<len(nums):
+                if stack:
+                    res[i] = stack[-1]
+            stack.append(current)
+        return res
+
+        # CIRCULAR NEXT SMALLER
+class Solution:
+    def nextSmallerElements(self, nums: List[int]) -> List[int]:
+        stack = []
+        res = [-1]*len(nums)
+
+        for i in range(2*len(nums)-1,-1,-1):
+            current = nums[i%len(nums)]
+            while stack and stack[-1] >= current:
+                stack.pop()
+            if i<len(nums):
+                if stack:
+                    res[i] = stack[-1]
+            stack.append(current)
+        return res
