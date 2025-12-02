@@ -86,3 +86,17 @@ class Solution:
                     res[i] = stack[-1]
             stack.append(current)
         return res
+
+
+class Solution:
+    def deleteMiddleFromStack(self, nums):
+        res  = []
+        n = len(stack)
+        target = n//2
+        temp = []
+
+        for i in range(n):
+            if i != target:
+                temp.append(stack.pop())
+
+        return temp[::-1]
