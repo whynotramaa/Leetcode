@@ -84,11 +84,41 @@ class Solution:
             i-=1
         if i>=0:
             j = n-1
-            while nums[j]<=nums[i]:
+            while nums[j]<=nums[i]: # we are trying to find just greater than ith value so we have smallest possible permutation
                 j-=1
             nums[i],nums[j] = nums[j],nums[i]
             nums[i+1:] = reversed(nums[i+1:])
             return nums
-        else:
+        else: # in this case we have highest permutation, so to make it minimum just reverse it :)
             nums.reverse()
             return nums
+
+
+class Solution:
+    def maxProfit(self, prices):
+        minii = prices[0]
+        maxii = 0
+        for i in range(prices):
+            minii = min(minii, prices[i])
+            profit = prices[i] - minii
+            maxii = max(maxii, profit)
+        return maxii
+
+'''
+SORT COLORS :
+    Use three pointers: low for next 0's position, mid for current scan, high for next 2's position.
+    low, mid = 0,0 and high = len(nums)-1
+
+    While mid <= high:
+        If nums[mid] == 0: swap with nums[low], move both low and mid forward.
+        If nums[mid] == 1: just move mid forward.
+        If nums[mid] == 2: swap with nums[high], move high backward (do not move mid).
+'''
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        curr_sum = max_sum = nums[0]
+        for num in nums[1:]:
+            curr_sum = max(num, num+curr_sum)
+            max_sum = max(max_sum, curr_sum)
+        return max_sum
