@@ -26,3 +26,20 @@ class Solution:
                 leaders.append(nums[i])
                 maxx = nums[i]
         return leaders # if we need to preserve order, reverse the list
+
+
+# longest Consecutive Sequence
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        max_len = 0
+        seen = set(nums)
+
+        for num in seen:
+            if num-1 not in seen:
+                curr = num
+                length = 1
+                while curr+1 in seen:
+                    curr+=1
+                    length+=1
+                max_len = max(max_len, length)
+        return max_len
