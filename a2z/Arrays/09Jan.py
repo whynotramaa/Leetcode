@@ -16,7 +16,19 @@ class Solution:
 class Solution:
     def subarraySumEqualKWithNegatives(self, nums: List[int], k: int) -> int:
         prefix = 0
-        seen = {0:-1}
+        count = 0
+
+        # seen[prefix_sum] = how many times this prefix sum has appeared
+        seen = {0: 1}
 
         for i in range(len(nums)):
-            prefix+=nums[i]
+            prefix += nums[i]
+
+            # If prefix - k exists, that means a subarray ending here sums to k
+            if prefix - k in seen:
+                count += seen[prefix - k]
+
+            # Store/update current prefix sum frequency
+            seen[prefix] = seen.get(prefix, 0) + 1
+
+        return count
